@@ -30,9 +30,10 @@ const loadCardData = (category_id) => {
 }
 const displayCardData = allData => {
     const cardContainer = document.getElementById('card-part')
-    // cardContainer.innerHTML = ``;
+    cardContainer.innerHTML = ``;
     allData.forEach(theData => {
-        console.log(theData);
+
+        // console.log(theData);
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('col')
         cardDiv.innerHTML = `
@@ -74,4 +75,3 @@ const loadNewsData = (news_id) => {
 
 
 categoriList()
-displayCardData()
