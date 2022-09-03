@@ -11,20 +11,22 @@ const displayList = allList => {
         // console.log(theList);
         const li = document.createElement('li');
         li.innerHTML = `
-        <a class="text-decoration-none fw-semibold text-black" href="">${theList.category_name}</a>
+        <a onclick="loadData('${theList.category_id}')" class="text-decoration-none fw-semibold text-black" href="">${theList.category_name}</a>
         `;
         ulList.appendChild(li)
     });
 }
 
-const loadData = () => {
-    const url = ` https://openapi.programming-hero.com/api/news/category/08`
+const loadData = (category_id) => {
+    console.log(category_id, 'get element');
+    const url = ` https://openapi.programming-hero.com/api/news/category/${category_id}`
     fetch(url)
         .then(res => res.json())
         .then(data => displayData(data.data))
 }
 const displayData = allData => {
     const cardCont = document.getElementById('card-conteiner')
+    cardCont.innerHTML = '';
     allData.forEach(theData => {
         // console.log(theData);
         const theDiv = document.createElement('div');
@@ -46,8 +48,8 @@ const displayData = allData => {
             </div>
             <div><i class="fa-solid fa-eye">${theData.total_view}</i></div>
             <div>
-            <button type="button" class="btn btn-primary">
-            Show Details
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            See Details
         </button>
             </div>
         </div>
@@ -57,5 +59,5 @@ const displayData = allData => {
     });
 }
 
-loadData()
+// loadData()
 loadList()
