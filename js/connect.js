@@ -87,14 +87,14 @@ const displayCardData = allData => {
     });
 }
 
-const loadNewsData = (news_id) => {
-    // console.log('get detail', news_id);
-    const url = `https://openapi.programming-hero.com/api/news/${news_id}`
-    console.log(url);
-    fetch(url)
-        .then(res => res.json())
-        .then(data => console.log(data))
-}
-
+// const loadNewsData = (news_id) => {
+//     // console.log('get detail', news_id);
+//     const url = `https://openapi.programming-hero.com/api/news/${news_id}`
+//     console.log(url);
+//     fetch(url)
+//         .then(res => res.json())
+//         .then(data => console.log(data))
+// }
+// loadNewsData()
 
 categoriList()
