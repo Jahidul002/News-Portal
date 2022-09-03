@@ -6,15 +6,15 @@ const categoriList = () => {
 }
 const displaycategoriList = allList => {
     // console.log(allList);
-    const ulid = document.getElementById('ul-id');
+    const ulList = document.getElementById('list-item');
     allList.forEach(theList => {
 
         // console.log(theList);
         const li = document.createElement('li');
         li.innerHTML = `
-    <a onclick="loadCardData('${theList.category_id}')" class="text-decoration-none fw-semibold text-info">${theList.category_name}</a>
+    <a onclick="loadCardData('${theList.category_id}')" class="text-decoration-none fw-semibold li-txt" href="#">${theList.category_name}</a>
     `;
-        ulid.appendChild(li)
+        ulList.appendChild(li)
         // console.log(theList.category_id)
     });
 }
@@ -29,14 +29,14 @@ const loadCardData = (category_id) => {
         .then(data => displayCardData(data.data))
 }
 const displayCardData = allData => {
-    const cardContainer = document.getElementById('card-part')
-    cardContainer.innerHTML = ``;
+    const cardCont = document.getElementById('card-Container')
+    cardCont.innerHTML = ``;
     allData.forEach(theData => {
 
         // console.log(theData);
-        const cardDiv = document.createElement('div');
-        cardDiv.classList.add('col')
-        cardDiv.innerHTML = `
+        const theDiv = document.createElement('div');
+        theDiv.classList.add('col')
+        theDiv.innerHTML = `
     <div class="card h-100">
     <img class="img-fluid" src="${theData.image_url}" class="card-img-top" alt="...">
     <div class="card-body">
@@ -54,13 +54,11 @@ const displayCardData = allData => {
         <div><i class="fa-solid fa-eye">${theData.total_view}</i></div>
         <div>
         <button  href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#see-more">See More</button>
-       
-
-        </div>
+         </div>
     </div>
 </div>
     `
-        cardContainer.appendChild(cardDiv)
+        cardCont.appendChild(theDiv)
     });
 }
 

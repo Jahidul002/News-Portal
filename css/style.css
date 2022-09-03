@@ -7,3 +7,15 @@ li {
     width: 50px;
     border-radius: 50%;
 }
+
+.logo-txt {
+    background-color: rgb(83, 151, 74);
+    font-weight: 600;
+    color: rgb(131, 73, 52);
+    border-radius: 10px;
+    padding: 3px
+}
+
+.li-txt {
+    color: orangered;
+}
