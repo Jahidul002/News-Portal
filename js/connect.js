@@ -35,7 +35,7 @@ const displayData = allData => {
     const cardCont = document.getElementById('card-Container')
     cardCont.innerHTML = ``;
     allData.forEach(theData => {
-        loadNewsData(theData._id)
+        // loadNewsData(theData._id)
         // console.log(theData);
         const theDiv = document.createElement('div');
         theDiv.classList.add('col')
@@ -56,7 +56,7 @@ const displayData = allData => {
         </div>
         <div><i class="fa-solid fa-eye">${theData.total_view}</i></div>
         <div>
-        <button  href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#see-more">See More</button>
+        <button onclick="loadNewsData('${theData._id}')" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#see-details">See More</button>
          </div>
     </div>
 </div>
@@ -79,36 +79,21 @@ const toggleSpinner = isLoading => {
 
 
 
-const loadNewsData = (news_id) => {
-    // console.log('get detail', news_id);
+const loadNewsData = async (news_id) => {
     const url = `https://openapi.programming-hero.com/api/news/${news_id}`
-    // console.log(url);
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayNews(data, data[0]))
-}
-const displayNews = (theNewses) => {
-    const newsData = theNewses.data[0];
-
-    const { details, title, } = newsData;
-    // console.log(title);
-    console.log(newsData);
-    const modalTitle = document.getElementById('modal-title');
-    modalTitle.innerText = `${title}`
-    const modalBody = document.getElementById('modal-body');
-    modalBody.innerText = `${details}`
-    const imgCont = document.getElementById('img-cnt')
-    const modalImg = document.getElementById('modal-img')
-    modalImg.innerHTML = ` <img style="height:50px ; border-radius: 50%;" src="${newsData.author.img}" alt="">
-    <div>
-    <p id="author-name" class="fs-5">${newsData.author.name}</p>
-       <p class="fs-6">${newsData.author.published_date}</p>
- </div>
-    `
-    imgCont.appendChild(modalImg);
-    const authorName = document.getElementById('author-name');
-
+    const res = await fetch(url)
+    const data = await res.json()
+    DisplayNews(data.data[0])
 }
 
+const DisplayNews = news => {
+    console.log(news)
+    const modalNews = document.getElementById('see-detailsLabel');
+    modalNews.innerText = news.details
+    const modalBody = document.getElementById('modal-body')
+    modalBody.innerHTML =
+        `<img src=" ${news.image_url}" class="card-img-top" alt="...">`
+}
 categoriList()
 loadData('08')
+// 
