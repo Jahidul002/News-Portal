@@ -1,11 +1,11 @@
-const categoriList = () => {
+const loadCategoriList = () => {
     const url = `https://openapi.programming-hero.com/api/news/categories/`
     fetch(url)
         .then(res => res.json())
-        .then(data => displaycategoriList(data.data.news_category))
+        .then(data => displayList(data.data.news_category))
 
 }
-const displaycategoriList = allList => {
+const displayList = allList => {
     // console.log(allList);
 
     const ulList = document.getElementById('list-item');
@@ -83,10 +83,10 @@ const loadNewsData = async (news_id) => {
     const url = `https://openapi.programming-hero.com/api/news/${news_id}`
     const res = await fetch(url)
     const data = await res.json()
-    DisplayNews(data.data[0])
+    DisplayNewsData(data.data[0])
 }
 
-const DisplayNews = news => {
+const DisplayNewsData = news => {
     console.log(news)
     const modalNews = document.getElementById('see-detailsLabel');
     modalNews.innerText = news.details
@@ -99,6 +99,6 @@ const DisplayNews = news => {
         </div>
         `
 }
-categoriList()
+loadCategoriList()
 loadData('08')
 // 
