@@ -90,13 +90,24 @@ const loadNewsData = (news_id) => {
 const displayNews = (theNewses) => {
     const newsData = theNewses.data[0];
 
-    const { details, title } = newsData;
-    console.log(title);
+    const { details, title, } = newsData;
+    // console.log(title);
     console.log(newsData);
     const modalTitle = document.getElementById('modal-title');
     modalTitle.innerText = `${title}`
     const modalBody = document.getElementById('modal-body');
     modalBody.innerText = `${details}`
+    const imgCont = document.getElementById('img-cnt')
+    const modalImg = document.getElementById('modal-img')
+    modalImg.innerHTML = ` <img style="height:50px ; border-radius: 50%;" src="${newsData.author.img}" alt="">
+    <div>
+    <p id="author-name" class="fs-5">${newsData.author.name}</p>
+       <p class="fs-6">${newsData.author.published_date}</p>
+ </div>
+    `
+    imgCont.appendChild(modalImg);
+    const authorName = document.getElementById('author-name');
+
 }
 
 categoriList()
