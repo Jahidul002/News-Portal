@@ -7,14 +7,15 @@ const categoriList = () => {
 }
 const displaycategoriList = allList => {
     // console.log(allList);
+
     const ulList = document.getElementById('list-item');
     allList.forEach(theList => {
 
         // console.log(theList);
         const li = document.createElement('li');
         li.innerHTML = `
-    <a onclick="loadData('${theList.category_id}')" class="text-decoration-none fw-semibold li-txt" href="#">${theList.category_name}</a>
-    `;
+        <a onclick="loadData('${theList.category_id}')" class="text-decoration-none fw-semibold li-txt" href="#">${theList.category_name}</a>
+        `;
         ulList.appendChild(li)
         // console.log(theList.category_id)
     });
@@ -23,13 +24,14 @@ const displaycategoriList = allList => {
 
 
 const loadData = (category_id) => {
+    toggleSpinner(true)
     console.log(category_id)
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`
     fetch(url)
         .then(res => res.json())
-        .then(data => displayCardData(data.data))
+        .then(data => displayData(data.data))
 }
-const displayCardData = allData => {
+const displayData = allData => {
     const cardCont = document.getElementById('card-Container')
     cardCont.innerHTML = ``;
     allData.forEach(theData => {
@@ -85,7 +87,21 @@ const displayCardData = allData => {
     `
         cardCont.appendChild(theDiv)
     });
+    toggleSpinner(false)
 }
+
+
+const toggleSpinner = isLoading => {
+    const loaderSec = document.getElementById('loader');
+    if (isLoading) {
+        loaderSec.classList.remove('d-none')
+    }
+    else {
+        loaderSec.classList.add('d-none')
+    }
+}
+
+
 
 // const loadNewsData = (news_id) => {
 //     // console.log('get detail', news_id);
