@@ -25,7 +25,7 @@ const displaycategoriList = allList => {
 
 const loadData = (category_id) => {
     toggleSpinner(true)
-    console.log(category_id)
+    // console.log(category_id)
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`
     fetch(url)
         .then(res => res.json())
@@ -35,7 +35,7 @@ const displayData = allData => {
     const cardCont = document.getElementById('card-Container')
     cardCont.innerHTML = ``;
     allData.forEach(theData => {
-
+        loadNewsData(theData._id)
         // console.log(theData);
         const theDiv = document.createElement('div');
         theDiv.classList.add('col')
@@ -60,30 +60,6 @@ const displayData = allData => {
          </div>
     </div>
 </div>
-
-<div class="modal fade" id="see-more" tabindex="-1" aria-labelledby="see-moreLabel" aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="see-moreLabel">${theData.title}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-           ${theData.details}
-        </div>
-        <div class="d-flex">
-            <img style="height:50px ; border-radius: 50%;" src="${theData.author.img}" alt="">
-            <div>
-                 <p class="fs-5">${theData.author.name}</p>
-                <p class="fs-6">${theData.author.published_date}</p>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-    </div>
-</div>
-</div>
     `
         cardCont.appendChild(theDiv)
     });
@@ -103,15 +79,25 @@ const toggleSpinner = isLoading => {
 
 
 
-// const loadNewsData = (news_id) => {
-//     // console.log('get detail', news_id);
-//     const url = `https://openapi.programming-hero.com/api/news/${news_id}`
-//     console.log(url);
-//     fetch(url)
-//         .then(res => res.json())
-//         .then(data => console.log(data))
-// }
-// loadNewsData()
+const loadNewsData = (news_id) => {
+    // console.log('get detail', news_id);
+    const url = `https://openapi.programming-hero.com/api/news/${news_id}`
+    // console.log(url);
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayNews(data, data[0]))
+}
+const displayNews = (theNewses) => {
+    const newsData = theNewses.data[0];
+
+    const { details, title } = newsData;
+    console.log(title);
+    console.log(newsData);
+    const modalTitle = document.getElementById('modal-title');
+    modalTitle.innerText = `${title}`
+    const modalBody = document.getElementById('modal-body');
+    modalBody.innerText = `${details}`
+}
 
 categoriList()
 loadData('08')
