@@ -90,9 +90,14 @@ const DisplayNews = news => {
     console.log(news)
     const modalNews = document.getElementById('see-detailsLabel');
     modalNews.innerText = news.details
-    const modalBody = document.getElementById('modal-body')
-    modalBody.innerHTML =
-        `<img src=" ${news.image_url}" class="card-img-top" alt="...">`
+    const authorCont = document.getElementById('author-cont')
+    authorCont.innerHTML = `
+        <img style="height:50px ; border-radius: 50%;" src="${news.author.img}" alt="">
+        <div>
+            <p class="fs-5">${news.author.name}</p>
+            <p class="fs-6">${news.author.published_date}</p>
+        </div>
+        `
 }
 categoriList()
 loadData('08')
