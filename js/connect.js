@@ -114,3 +114,4 @@ const toggleSpinner = isLoading => {
 // loadNewsData()
 
 categoriList()
+loadData('08')
